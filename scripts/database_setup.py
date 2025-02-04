@@ -1,21 +1,30 @@
 import os
 import logging
+import warnings
+import sys
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 import pandas as pd
 
+# Suppress warnings
+warnings.filterwarnings("ignore")
+
 # Ensure logs folder exists
 os.makedirs("../log", exist_ok=True)  # Create log directory if it doesn't exist
+
+
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("../log/database_setup.log", encoding='utf-8'),  # Log to file with UTF-8 encoding
-        logging.StreamHandler()  # Log to console
+        logging.FileHandler("../log/database_setup.log"),  # Log to file
+        logging.StreamHandler(sys.stdout)  # Log to console
     ]
 )
+
+
 
 # Load environment variables
 load_dotenv('../.env')  # Load .env file from the project root
@@ -33,10 +42,10 @@ def get_db_connection():
         engine = create_engine(DATABASE_URL)
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))  # Test connection
-        logging.info("[SUCCESS] Successfully connected to the PostgreSQL database.")
+        logging.info("✅ Successfully connected to the PostgreSQL database.")
         return engine
     except Exception as e:
-        logging.error(f"[ERROR] Database connection failed: {e}")
+        logging.error(f"❌ Database connection failed: {e}")
         raise
 
 def create_table(engine):
@@ -55,30 +64,14 @@ def create_table(engine):
     try:
         with engine.connect().execution_options(isolation_level="AUTOCOMMIT") as connection:
             connection.execute(text(create_table_query))
-        logging.info("[SUCCESS] Table 'telegram_messages' created successfully.")
+        logging.info("✅ Table 'telegram_messages' created successfully.")
     except Exception as e:
-        logging.error(f"[ERROR] Error creating table: {e}")
+        logging.error(f"❌ Error creating table: {e}")
         raise
 
 def clean_data(df):
     """Clean and transform the scraped data."""
     try:
-        # Verify that the required columns exist
-        required_columns = ['Channel Title', 'Channel Username', 'ID', 'Message', 'Date', 'Media Path']
-        for column in required_columns:
-            if column not in df.columns:
-                raise KeyError(f"Missing required column: {column}")
-
-        # Rename columns to match the database schema
-        df = df.rename(columns={
-            'Channel Title': 'channel_title',
-            'Channel Username': 'channel_username',
-            'ID': 'message_id',
-            'Message': 'message',
-            'Date': 'message_date',
-            'Media Path': 'media_path'
-        })
-
         # Remove duplicates based on message_id
         df = df.drop_duplicates(subset=['message_id'], keep='first')
 
@@ -89,10 +82,10 @@ def clean_data(df):
         # Standardize date format (if needed)
         df['message_date'] = pd.to_datetime(df['message_date'], errors='coerce')  # Convert to datetime
 
-        logging.info("[SUCCESS] Data cleaning and transformation completed.")
+        logging.info("✅ Data cleaning and transformation completed.")
         return df
     except Exception as e:
-        logging.error(f"[ERROR] Error cleaning data: {e}")
+        logging.error(f"❌ Error cleaning data: {e}")
         raise
 
 def insert_data(engine, cleaned_df):
@@ -123,9 +116,9 @@ def insert_data(engine, cleaned_df):
                     }
                 )
 
-        logging.info(f"[SUCCESS] {len(cleaned_df)} records inserted into PostgreSQL database.")
+        logging.info(f"✅ {len(cleaned_df)} records inserted into PostgreSQL database.")
     except Exception as e:
-        logging.error(f"[ERROR] Error inserting data: {e}")
+        logging.error(f"❌ Error inserting data: {e}")
         raise
 
 if __name__ == "__main__":
@@ -139,9 +132,9 @@ if __name__ == "__main__":
     scraped_data_path = "../data/scraped_data.csv"  # Path to scraped data
     try:
         scraped_data = pd.read_csv(scraped_data_path)
-        logging.info(f"[SUCCESS] Loaded scraped data from {scraped_data_path}.")
+        logging.info(f"✅ Loaded scraped data from {scraped_data_path}.")
     except Exception as e:
-        logging.error(f"[ERROR] Error loading scraped data: {e}")
+        logging.error(f"❌ Error loading scraped data: {e}")
         raise
 
     # Clean and transform the data
@@ -149,3 +142,5 @@ if __name__ == "__main__":
 
     # Insert data into the database
     insert_data(engine, cleaned_data)
+
+
