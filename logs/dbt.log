@@ -1,0 +1,30 @@
+[0m20:45:00.124417 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022892FE8700>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022894EBD5A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022894EBD330>]}
+
+
+============================== 20:45:00.170892 | 891277da-fba3-445b-99cc-59e81f5e1168 ==============================
+[0m20:45:00.170892 [info ] [MainThread]: Running with dbt=1.9.2
+[0m20:45:00.170892 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'C:\\Users\\Tsebaot\\.dbt', 'debug': 'False', 'version_check': 'True', 'log_path': 'logs', 'fail_fast': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt init telemed_datawarehouse', 'introspect': 'True', 'static_parser': 'True', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m08:56:51.669078 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FF6325C760>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FF6512D600>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FF6512D390>]}
+
+
+============================== 08:56:51.794874 | 4d22e452-fac9-4172-932c-f7d241e2283f ==============================
+[0m08:56:51.794874 [info ] [MainThread]: Running with dbt=1.9.2
+[0m08:56:51.803899 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'fail_fast': 'False', 'log_path': 'logs', 'profiles_dir': 'C:\\Users\\Tsebaot\\.dbt', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'log_format': 'default', 'invocation_command': 'dbt init telemed_datawarehouse', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m08:56:52.955461 [debug] [MainThread]: Starter project path: C:\Users\Tsebaot\Desktop\week 7\TeleMed-DataWarehouse\week-7\lib\site-packages\dbt\include\starter_project
+[0m08:56:53.522404 [info ] [MainThread]: 
+Your new dbt project "telemed_datawarehouse" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m08:56:53.529168 [info ] [MainThread]: Setting up your profile.

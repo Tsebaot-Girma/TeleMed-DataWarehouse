@@ -1,0 +1,9 @@
+# models/sources.yml
+version: 2
+
+sources:
+  - name: raw
+    schema: public
+    tables:
+      - name: telegram_messages
+        description: "Raw scraped data from Telegram channels"
