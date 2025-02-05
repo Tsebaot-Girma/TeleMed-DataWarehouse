@@ -3,3 +3,4 @@ week-7/
 .env
 scripts/__pycache__/
 log/
+logs/
